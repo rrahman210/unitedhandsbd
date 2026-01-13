@@ -2,6 +2,10 @@
 	"main": "dist/_worker.js/index.js",
 	"name": "unitedhandsbd",
 	"compatibility_date": "2025-12-27",
+	"routes": [
+		{ "pattern": "unitedhandsbd.org/*", "zone_name": "unitedhandsbd.org" },
+		{ "pattern": "www.unitedhandsbd.org/*", "zone_name": "unitedhandsbd.org" }
+	],
 	"compatibility_flags": [
 		"nodejs_compat",
 		"global_fetch_strictly_public"
