@@ -1,0 +1,31 @@
+---
+interface Props {
+  videoId: string;
+  title?: string;
+  aspectRatio?: '16:9' | '4:3' | '1:1';
+}
+
+const { videoId, title = 'YouTube Video', aspectRatio = '16:9' } = Astro.props;
+
+const aspectClasses = {
+  '16:9': 'aspect-video',
+  '4:3': 'aspect-[4/3]',
+  '1:1': 'aspect-square'
+};
+---
+
+<div class="youtube-embed w-full">
+  <div class={`relative ${aspectClasses[aspectRatio]} rounded-2xl overflow-hidden bg-gray-900`}>
+    <iframe
+      src={`https://www.youtube.com/embed/${videoId}`}
+      title={title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      loading="lazy"
+      class="absolute inset-0 w-full h-full"
+    ></iframe>
+  </div>
+  {title && (
+    <p class="mt-3 text-gray-700 font-medium text-sm">{title}</p>
+  )}
+</div>

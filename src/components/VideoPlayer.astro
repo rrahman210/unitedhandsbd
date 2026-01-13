@@ -1,0 +1,42 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+  title?: string;
+  aspectRatio?: '16:9' | '4:3' | '1:1';
+}
+
+const { src, poster, title, aspectRatio = '16:9' } = Astro.props;
+
+const aspectClasses = {
+  '16:9': 'aspect-video',
+  '4:3': 'aspect-[4/3]',
+  '1:1': 'aspect-square'
+};
+---
+
+<div class="video-player w-full">
+  <div class={`relative ${aspectClasses[aspectRatio]} rounded-2xl overflow-hidden bg-gray-900`}>
+    <video
+      src={src}
+      poster={poster}
+      controls
+      preload="metadata"
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <p class="text-white text-center p-4">
+        Your browser doesn't support HTML5 video.
+        <a href={src} class="text-[var(--color-teal)] underline">Download the video</a>.
+      </p>
+    </video>
+  </div>
+  {title && (
+    <p class="mt-3 text-gray-700 font-medium text-sm">{title}</p>
+  )}
+</div>
+
+<style>
+  video::-webkit-media-controls-panel {
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  }
+</style>

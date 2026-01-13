@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    category: 'About Us',
+    questions: [
+      { q: 'What is United Hands Bangladesh?', a: 'United Hands Bangladesh is a human rights organization dedicated to empowering communities through education, healthcare, food distribution, and sustainable development programs across Bangladesh.' },
+      { q: 'When was United Hands Bangladesh founded?', a: 'United Hands Bangladesh was founded in 2025 by Anisur Rahman with a vision to serve humanity and create lasting positive change in communities.' },
+      { q: 'Where is United Hands Bangladesh located?', a: 'Our office is located at 48 East Basabo, Dhaka-1214, Bangladesh. We primarily serve communities in and around Dhaka.' },
+    ]
+  },
+  {
+    category: 'Programs & Services',
+    questions: [
+      { q: 'What programs does United Hands Bangladesh offer?', a: 'We offer programs in Educational Outreach, Healthcare Support (including free medical camps), Community Building, Food Distribution, Legal Assistance, and Skills Development.' },
+      { q: 'When and where is the weekly food distribution?', a: 'Our food distribution takes place every Friday at 3:00 PM at 4/2 Kadamtala, Dhaka 1214. Everyone in need is welcome to join.' },
+      { q: 'Are your medical camps really free?', a: 'Yes, our medical camps are completely free. We provide free consultations, basic health checkups, and health awareness programs to underserved communities.' },
+    ]
+  },
+  {
+    category: 'Volunteering',
+    questions: [
+      { q: 'How can I volunteer with United Hands Bangladesh?', a: 'You can volunteer by visiting our Contact page or calling us at +880 1825 554 945. We have opportunities in food distribution, medical camps, event coordination, and community outreach.' },
+      { q: 'Do I need any special skills to volunteer?', a: 'No special skills are required! We welcome volunteers from all backgrounds. We provide training and guidance for all volunteer positions.' },
+      { q: 'What is the time commitment for volunteering?', a: 'Time commitment varies by role. Food distribution volunteers typically commit 3-4 hours weekly (Fridays), while other roles can be project-based or flexible.' },
+    ]
+  },
+  {
+    category: 'Support & Donations',
+    questions: [
+      { q: 'How can I support United Hands Bangladesh?', a: 'You can support us by volunteering, spreading awareness about our work, partnering with us for programs, or connecting us with resources and networks.' },
+      { q: 'Do you accept monetary donations?', a: 'While we primarily focus on volunteer-driven initiatives, we do accept donations for specific programs. Please contact us for more information about how you can contribute.' },
+      { q: 'Can organizations partner with you?', a: 'Yes! We welcome partnerships with businesses, NGOs, and other organizations. Contact us to discuss collaboration opportunities.' },
+    ]
+  },
+];
+
+// FAQ Schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.flatMap(cat => cat.questions.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  })))
+};
+---
+
+<Layout
+  title="Frequently Asked Questions"
+  description="Find answers to common questions about United Hands Bangladesh, our programs, volunteering opportunities, and how you can get involved."
+  keywords="United Hands Bangladesh FAQ, nonprofit questions, volunteer FAQ Bangladesh, charity questions Dhaka"
+>
+  <Header slot="header" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">FAQ</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h1>
+        <p class="text-lg text-gray-600">Find answers to common questions about our organization, programs, and how you can get involved.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {faqs.map(category => (
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+            <span class="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-teal)] rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            {category.category}
+          </h2>
+          <div class="space-y-4">
+            {category.questions.map(faq => (
+              <details class="group bg-gray-50 rounded-xl">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                  <h3 class="font-semibold text-gray-900 pr-4">{faq.q}</h3>
+                  <svg class="w-5 h-5 text-[var(--color-teal)] transform group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="px-6 pb-6">
+                  <p class="text-gray-600 leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Still Have Questions?</h2>
+      <p class="text-gray-600 mb-8">We're here to help. Reach out to us and we'll get back to you as soon as possible.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="bg-[var(--color-teal)] text-white px-8 py-4 rounded-full font-semibold hover:bg-[var(--color-teal)]/90 transition-colors">
+          Contact Us
+        </a>
+        <a href="tel:+8801825554945" class="border-2 border-[var(--color-teal)] text-[var(--color-teal)] px-8 py-4 rounded-full font-semibold hover:bg-[var(--color-teal)] hover:text-white transition-colors">
+          Call +880 1825 554 945
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

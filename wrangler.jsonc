@@ -1,0 +1,25 @@
+{
+	"main": "dist/_worker.js/index.js",
+	"name": "unitedhandsbd",
+	"compatibility_date": "2025-12-27",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"kv_namespaces": [
+		{
+			"binding": "GALLERY_KV",
+			"id": "d30b2d9e1c5b4c57808098b65012ba32"
+		}
+	],
+	"triggers": {
+		"crons": ["0 6 * * *"]
+	}
+}

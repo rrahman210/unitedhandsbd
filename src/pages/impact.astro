@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+const stats = [
+  { value: '5,000+', label: 'Lives Impacted', description: 'Individuals directly benefited from our programs' },
+  { value: '50+', label: 'Community Events', description: 'Programs and events organized across Dhaka' },
+  { value: '100+', label: 'Active Volunteers', description: 'Dedicated individuals serving our community' },
+  { value: '10+', label: 'Programs Running', description: 'Ongoing initiatives across various sectors' },
+];
+
+const impactAreas = [
+  {
+    title: 'Food Security',
+    stat: '2,000+',
+    description: 'Families fed through weekly food distribution drives',
+    image: '/images/gallery/605340597_122119405491007573_4746787242545134854_n.jpg'
+  },
+  {
+    title: 'Healthcare Access',
+    stat: '500+',
+    description: 'Free medical consultations provided at health camps',
+    image: '/images/gallery/555385630_122105180217007573_5951213828479555981_n.jpg'
+  },
+  {
+    title: 'Disability Support',
+    stat: '200+',
+    description: 'People with disabilities supported with aid and care',
+    image: '/images/gallery/605359263_122119405011007573_7132557887102658754_n.jpg'
+  },
+  {
+    title: 'Community Building',
+    stat: '1,000+',
+    description: 'Community members engaged in our programs',
+    image: '/images/gallery/581936617_122113959447007573_2012506508899052520_n.jpg'
+  },
+];
+---
+
+<Layout 
+  title="Our Impact" 
+  description="Discover the measurable impact of United Hands Bangladesh. See how we've touched 5,000+ lives through food distribution, healthcare, and community programs."
+  keywords="nonprofit impact Bangladesh, charity results Dhaka, food distribution impact, healthcare outreach Bangladesh"
+>
+  <Header slot="header" />
+
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">Our Impact</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Measuring Our Impact, One Life at a Time</h1>
+        <p class="text-lg text-gray-600">Every number represents a real person, a real family, a real story of hope.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-[var(--color-teal)] to-[#1a5f5f]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map(stat => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</div>
+            <div class="text-white font-semibold mb-1">{stat.label}</div>
+            <div class="text-white/70 text-sm">{stat.description}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Where We Make a Difference</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Impact by Program Area</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        {impactAreas.map(area => (
+          <div class="group bg-gray-50 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="relative h-48 overflow-hidden">
+              <OptimizedImage src={area.image} alt={area.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4">
+                <span class="text-4xl font-bold text-white">{area.stat}</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{area.title}</h3>
+              <p class="text-gray-600">{area.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-teal)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Help Us Create More Impact</h2>
+      <p class="text-white/90 text-lg mb-8">Join our mission and be part of the change.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/volunteer" class="bg-white text-[var(--color-teal)] px-8 py-4 rounded-full font-semibold hover:bg-[var(--color-cream)] transition-colors">Volunteer With Us</a>
+        <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[var(--color-teal)] transition-colors">Partner With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

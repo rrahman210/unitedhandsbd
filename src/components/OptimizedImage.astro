@@ -1,0 +1,54 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
+  priority?: boolean; // For LCP images
+  aspectRatio?: string; // e.g., "16/9", "4/3", "1/1"
+}
+
+const {
+  src,
+  alt,
+  class: className,
+  loading = 'lazy',
+  width,
+  height,
+  priority = false,
+  aspectRatio
+} = Astro.props;
+
+// Convert original path to optimized path
+const pathParts = src.split('/');
+const folder = pathParts.slice(0, -1).join('/');
+const filename = pathParts[pathParts.length - 1];
+
+// Normalize filename extension to .jpg for optimized version
+const normalizedFilename = filename.replace(/\.(jpeg|png)$/i, '.jpg');
+const webpFilename = normalizedFilename.replace(/\.jpg$/i, '.webp');
+
+const optimizedJpg = `${folder}/optimized/${normalizedFilename}`;
+const optimizedWebp = `${folder}/optimized/${webpFilename}`;
+
+// Build style for aspect ratio
+const aspectStyle = aspectRatio ? `aspect-ratio: ${aspectRatio};` : '';
+---
+
+<picture>
+  <source srcset={optimizedWebp} type="image/webp" />
+  <source srcset={optimizedJpg} type="image/jpeg" />
+  <img
+    src={optimizedJpg}
+    alt={alt}
+    class={className}
+    loading={priority ? 'eager' : loading}
+    width={width}
+    height={height}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : undefined}
+    style={aspectStyle}
+  />
+</picture>

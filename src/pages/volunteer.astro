@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const opportunities = [
+  { title: 'Food Distribution Volunteer', description: 'Help distribute food packages to families every Friday', commitment: '3-4 hours weekly', icon: 'food' },
+  { title: 'Medical Camp Assistant', description: 'Assist healthcare professionals during free medical camps', commitment: 'Monthly events', icon: 'healthcare' },
+  { title: 'Community Outreach', description: 'Engage with communities and spread awareness about our programs', commitment: 'Flexible hours', icon: 'community' },
+  { title: 'Event Coordinator', description: 'Help organize and manage community events and programs', commitment: 'Project-based', icon: 'event' },
+];
+
+const benefits = [
+  'Make a real difference in your community',
+  'Gain valuable experience in humanitarian work',
+  'Connect with like-minded individuals',
+  'Develop leadership and organizational skills',
+  'Receive volunteer certificates and references',
+  'Be part of a growing movement for change',
+];
+---
+
+<Layout 
+  title="Volunteer With Us" 
+  description="Join United Hands Bangladesh as a volunteer. Make a difference in your community through food distribution, healthcare support, and community programs."
+  keywords="volunteer Bangladesh, volunteer opportunities Dhaka, nonprofit volunteer, humanitarian volunteer, community service Bangladesh"
+>
+  <Header slot="header" />
+
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">Volunteer</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Be the Change You Want to See</h1>
+        <p class="text-lg text-gray-600">Join our team of dedicated volunteers and help us create lasting positive change in communities across Bangladesh.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Opportunities</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Volunteer Positions</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        {opportunities.map(opp => (
+          <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-teal)] rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{opp.title}</h3>
+            <p class="text-gray-600 mb-4">{opp.description}</p>
+            <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-medium px-3 py-1 rounded-full">{opp.commitment}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Why Volunteer?</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-8">Benefits of Volunteering</h2>
+          <ul class="space-y-4">
+            {benefits.map(benefit => (
+              <li class="flex items-center gap-3">
+                <svg class="w-6 h-6 text-[var(--color-teal)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-700">{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Ready to Join?</h3>
+          <p class="text-gray-600 mb-6">Contact us to learn more about volunteer opportunities and how you can get involved.</p>
+          <a href="/contact" class="block w-full bg-[var(--color-teal)] text-white text-center py-4 rounded-full font-semibold hover:bg-[var(--color-teal)]/90 transition-colors">Apply Now</a>
+          <p class="text-center text-gray-500 text-sm mt-4">Or call us at +880 1825 554 945</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

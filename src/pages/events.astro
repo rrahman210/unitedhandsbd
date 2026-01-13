@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+function getNextFriday(fromDate: Date): Date {
+  const date = new Date(fromDate);
+  const dayOfWeek = date.getDay();
+  const daysUntilFriday = (5 - dayOfWeek + 7) % 7 || 7;
+  date.setDate(date.getDate() + daysUntilFriday);
+  return date;
+}
+
+function formatDate(date: Date) {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return { day: date.getDate(), month: months[date.getMonth()], year: date.getFullYear() };
+}
+
+const today = new Date();
+const friday1 = getNextFriday(today);
+const friday2 = getNextFriday(new Date(friday1.getTime() + 86400000));
+const friday3 = getNextFriday(new Date(friday2.getTime() + 86400000));
+
+const upcomingEvents = [
+  { title: 'Weekly Food Distribution', date: formatDate(friday1), time: '3:00 PM', location: '4/2 Kadamtala, Dhaka 1214', type: 'Food Distribution' },
+  { title: 'Weekly Food Distribution', date: formatDate(friday2), time: '3:00 PM', location: '4/2 Kadamtala, Dhaka 1214', type: 'Food Distribution' },
+  { title: 'Weekly Food Distribution', date: formatDate(friday3), time: '3:00 PM', location: '4/2 Kadamtala, Dhaka 1214', type: 'Food Distribution' },
+];
+
+const pastEvents = [
+  { title: 'Community Food Drive', date: 'December 2025', attendees: '200+ families served' },
+  { title: 'Free Medical Camp', date: 'November 2025', attendees: '150+ checkups conducted' },
+  { title: 'Disability Support Program', date: 'October 2025', attendees: '50+ individuals helped' },
+];
+---
+
+<Layout
+  title="Events"
+  description="Stay updated with United Hands Bangladesh events. Join our weekly food distribution, medical camps, and community programs in Dhaka."
+  keywords="charity events Bangladesh, food distribution Dhaka, free medical camp Bangladesh, community events, nonprofit events"
+>
+  <Header slot="header" />
+
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">Events</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Upcoming Events & Programs</h1>
+        <p class="text-lg text-gray-600">Join us at our community events and be part of the positive change we're creating together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Mark Your Calendar</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Upcoming Events</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {upcomingEvents.map(event => (
+          <div class="bg-white rounded-2xl border-2 border-gray-100 overflow-hidden hover:border-[var(--color-teal)] hover:shadow-lg transition-all">
+            <div class="bg-gradient-to-r from-[var(--color-teal)] to-[#1a5f5f] p-6 text-center">
+              <span class="text-5xl font-bold text-white">{event.date.day}</span>
+              <p class="text-white/90 mt-1">{event.date.month}</p>
+            </div>
+            <div class="p-6">
+              <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs font-medium px-3 py-1 rounded-full mb-3">{event.type}</span>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{event.title}</h3>
+              <div class="space-y-2 text-sm text-gray-600">
+                <p class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {event.time}
+                </p>
+                <p class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
+                  {event.location}
+                </p>
+              </div>
+              <p class="text-[var(--color-teal)] text-sm font-medium mt-4">Recurring every Friday</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Looking Back</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Past Events</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {pastEvents.map(event => (
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="font-bold text-gray-900 mb-2">{event.title}</h3>
+            <p class="text-gray-500 text-sm mb-2">{event.date}</p>
+            <p class="text-[var(--color-teal)] font-medium text-sm">{event.attendees}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-teal)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Stay Updated</h2>
+      <p class="text-white/90 text-lg mb-8">Follow us on social media to never miss an event.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://facebook.com/2025uhb" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-[var(--color-teal)] px-6 py-3 rounded-full font-semibold hover:bg-[var(--color-cream)] transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://linkedin.com/company/unitedhandsbangladesh" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[var(--color-teal)] transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

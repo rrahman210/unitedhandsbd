@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Anisur Rahman",
+  "jobTitle": "Founder & CEO",
+  "description": "Anisur Rahman is the Founder and CEO of United Hands Bangladesh, a dedicated human rights advocate with extensive experience in community organizing and migrant rights.",
+  "image": "https://unitedhandsbd.org/images/team/anisur-rahman-v2.png",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "United Hands Bangladesh",
+    "url": "https://unitedhandsbd.org"
+  },
+  "alumniOf": "Bangladesh Korea Migrant Center",
+  "knowsAbout": ["Human Rights", "Community Development", "Migrant Rights", "Nonprofit Leadership", "Social Welfare"],
+  "sameAs": [
+    "https://linkedin.com/in/anisur-rahman-490145385",
+    "https://facebook.com/2025uhb"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dhaka",
+    "addressCountry": "Bangladesh"
+  }
+};
+---
+
+<Layout
+  title="Anisur Rahman - Founder & CEO"
+  description="Anisur Rahman is the Founder and CEO of United Hands Bangladesh. A dedicated human rights advocate and former President of Bangladesh Korea Migrant Center, leading humanitarian initiatives across Bangladesh."
+  keywords="Anisur Rahman, United Hands Bangladesh CEO, Anisur Rahman Dhaka, humanitarian leader Bangladesh, nonprofit founder Bangladesh, human rights advocate Bangladesh, Bangladesh Korea Migrant Center President"
+  type="profile"
+>
+  <Header slot="header" />
+
+  <!-- Person Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sm mb-8">
+        <ol class="flex items-center gap-2 text-gray-500">
+          <li><a href="/" class="hover:text-[var(--color-teal)]">Home</a></li>
+          <li>/</li>
+          <li><a href="/team" class="hover:text-[var(--color-teal)]">Team</a></li>
+          <li>/</li>
+          <li class="text-gray-900">Anisur Rahman</li>
+        </ol>
+      </nav>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1">
+          <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            Founder & CEO
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Anisur Rahman
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Dedicated human rights advocate and visionary leader empowering communities across Bangladesh through compassion, education, and sustainable development.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="https://linkedin.com/in/anisur-rahman-490145385"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-[#0077B5] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#006396] transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              Connect on LinkedIn
+            </a>
+            <a
+              href="https://facebook.com/2025uhb"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-[#1877F2] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#166FE5] transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Follow on Facebook
+            </a>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-teal)] rounded-2xl opacity-20 blur-xl"></div>
+            <OptimizedImage
+              src="/images/team/anisur-rahman-v2.png"
+              alt="Anisur Rahman - Founder and CEO of United Hands Bangladesh"
+              class="relative rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">About Anisur Rahman</h2>
+
+      <div class="prose prose-lg max-w-none text-gray-600">
+        <p class="text-xl leading-relaxed mb-6">
+          Anisur Rahman is a distinguished human rights advocate and the visionary founder of United Hands Bangladesh. With a deep commitment to social justice and community empowerment, he has dedicated his career to serving the most vulnerable populations in Bangladesh.
+        </p>
+
+        <h3 class="text-2xl font-bold text-gray-900 mt-10 mb-4">Professional Background</h3>
+        <p class="leading-relaxed mb-6">
+          Before founding United Hands Bangladesh, Anisur Rahman served as the President of the Bangladesh Korea Migrant Center, where he gained invaluable experience in advocacy, community organizing, and understanding the challenges faced by marginalized populations. This experience shaped his approach to humanitarian work and informed the comprehensive programs now offered by United Hands Bangladesh.
+        </p>
+
+        <h3 class="text-2xl font-bold text-gray-900 mt-10 mb-4">Vision & Leadership</h3>
+        <p class="leading-relaxed mb-6">
+          Under Anisur Rahman's leadership, United Hands Bangladesh has grown into a respected organization that provides essential services including free medical camps, food distribution programs, educational support, and legal aid to communities across Dhaka and beyond. His hands-on approach and genuine compassion have earned him the trust and respect of both the communities he serves and his team of dedicated volunteers.
+        </p>
+
+        <h3 class="text-2xl font-bold text-gray-900 mt-10 mb-4">Areas of Expertise</h3>
+        <ul class="grid sm:grid-cols-2 gap-3 mb-6 list-none pl-0">
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Human Rights Advocacy
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Community Development
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Nonprofit Leadership
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Migrant Rights
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Social Welfare Programs
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Healthcare Initiatives
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="py-16 bg-[var(--color-cream)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <svg class="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+      </svg>
+      <blockquote class="text-2xl md:text-3xl font-medium text-gray-900 mb-6 italic">
+        "Every person deserves dignity, opportunity, and hope. Together, we can build a Bangladesh where no one is left behind."
+      </blockquote>
+      <cite class="text-[var(--color-teal)] font-semibold">- Anisur Rahman, Founder & CEO</cite>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-[var(--color-teal)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Join Anisur Rahman's Mission
+      </h2>
+      <p class="text-white/90 text-lg mb-8">
+        Be part of the movement to create lasting positive change in Bangladesh. Connect with us to volunteer, partner, or support our programs.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 bg-white text-[var(--color-teal)] px-8 py-4 rounded-full font-semibold hover:bg-[var(--color-cream)] transition-colors"
+        >
+          Get in Touch
+        </a>
+        <a
+          href="/volunteer"
+          class="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[var(--color-teal)] transition-colors"
+        >
+          Become a Volunteer
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

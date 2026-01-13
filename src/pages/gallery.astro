@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FacebookEmbed from '../components/FacebookEmbed.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+const videos = [
+  {
+    url: 'https://www.facebook.com/UnitedHandsBangladesh/videos/',
+    title: 'Food Distribution Initiative - November 7',
+    category: 'Food Distribution'
+  },
+];
+
+// Gallery images - organized by quality and category
+const images = [
+  // NEW high-quality photos (shown first)
+  { src: '/images/gallery/605340597_122119405491007573_4746787242545134854_n.jpg', alt: 'Smiling boy joyfully receiving food package', category: 'Food Distribution' },
+  { src: '/images/gallery/555385630_122105180217007573_5951213828479555981_n.jpg', alt: 'Free medical services queue - healthcare for all', category: 'Healthcare' },
+  { src: '/images/gallery/581931251_122113960773007573_7320039804328164070_n.jpg', alt: 'Grandmother and child receiving food assistance', category: 'Food Distribution' },
+  { src: '/images/gallery/557636179_122106841755007573_6663589741403764710_n.jpg', alt: 'Leader distributing food to smiling children', category: 'Food Distribution' },
+  { src: '/images/gallery/571197361_122112067671007573_2515374789331075447_n.jpg', alt: 'Two women happily receiving food packages', category: 'Food Distribution' },
+  { src: '/images/gallery/574104761_122112066819007573_4881499215873013039_n.jpg', alt: 'Inclusive community event with disability support', category: 'Disability Support' },
+  { src: '/images/gallery/581936617_122113959447007573_2012506508899052520_n.jpg', alt: 'Large community food distribution event', category: 'Food Distribution' },
+  // Existing quality photos
+  { src: '/images/gallery/590295344_122115878463007573_6828961916537642263_n.jpg', alt: 'Volunteer giving food to children', category: 'Food Distribution' },
+  { src: '/images/gallery/605359263_122119405011007573_7132557887102658754_n.jpg', alt: 'Bringing smiles to people with disabilities', category: 'Disability Support' },
+  { src: '/images/gallery/community-2.jpg', alt: 'Free healthcare checkups for community', category: 'Healthcare' },
+  { src: '/images/gallery/600302600_122118543885007573_2669771354120440175_n.jpg', alt: 'Joyful celebration - community receiving aid', category: 'Food Distribution' },
+  { src: '/images/gallery/590298745_122115878679007573_1844884259089963020_n.jpg', alt: 'Smiling girl receiving food assistance', category: 'Food Distribution' },
+  { src: '/images/gallery/591474761_122115877257007573_2188404650090162025_n.jpg', alt: 'Children and families at community event', category: 'Community' },
+  { src: '/images/gallery/1766783562693.jpg', alt: 'Supporting people with disabilities', category: 'Disability Support' },
+  { src: '/images/gallery/590302076_122115879159007573_4467600752420569848_n.jpg', alt: 'Women receiving essential supplies', category: 'Food Distribution' },
+  { src: '/images/gallery/600312389_122118543021007573_1044733114448348995_n.jpg', alt: 'Community food distribution event', category: 'Food Distribution' },
+  { src: '/images/gallery/testimonial-1.jpeg', alt: 'Community gathering for support programs', category: 'Community' },
+  { src: '/images/gallery/community-1.jpeg', alt: 'Community members at evening event', category: 'Community' },
+  { src: '/images/gallery/community-4.jpeg', alt: 'Families receiving aid packages', category: 'Food Distribution' },
+  { src: '/images/gallery/587840088_122115120123007573_7575782414095402221_n.jpg', alt: 'Community outreach and support', category: 'Community' },
+];
+
+const categories = ['All', 'Food Distribution', 'Healthcare', 'Disability Support', 'Community'];
+---
+
+<Layout title="Gallery" description="See the impact of United Hands Bangladesh through our photo gallery of community events, programs, and initiatives.">
+  <Header slot="header" />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+          Gallery
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Discover Moments of Impact
+        </h1>
+        <p class="text-lg text-gray-600">
+          Browse through photos from our community events, programs, and the lives we've touched together.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Filter -->
+  <section class="py-8 bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap gap-3" id="filter-buttons">
+        {categories.map((category, index) => (
+          <button
+            data-category={category}
+            class={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+              index === 0
+                ? 'bg-[var(--color-teal)] text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+        {images.map(image => (
+          <div
+            class="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer"
+            data-category={image.category}
+          >
+            <OptimizedImage
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              width={400}
+              height={256}
+              aspectRatio="16/10"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-4 left-4 right-4">
+                <span class="inline-block bg-[var(--color-primary)] text-white text-xs px-3 py-1 rounded-full mb-2">
+                  {image.category}
+                </span>
+                <p class="text-white text-sm">{image.alt}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Facebook Feed Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-medium px-4 py-1.5 rounded-full mb-4">
+          Live Updates
+        </span>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Follow Our Journey on Facebook
+        </h2>
+        <p class="text-gray-600">
+          See our latest posts, photos, and updates directly from our Facebook page.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Facebook Page Feed with Photos -->
+        <div class="col-span-full flex justify-center">
+          <div class="w-full max-w-2xl">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F2025uhb&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                width="500"
+                height="700"
+                style="border:none;overflow:hidden"
+                scrolling="no"
+                frameborder="0"
+                allowfullscreen={true}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                loading="lazy"
+                class="w-full"
+              ></iframe>
+            </div>
+            <p class="text-center text-gray-500 text-sm mt-4">
+              Follow us on <a href="https://www.facebook.com/2025uhb" target="_blank" rel="noopener" class="text-[var(--color-teal)] hover:underline">Facebook</a> and <a href="https://www.linkedin.com/company/unitedhandsbangladesh" target="_blank" rel="noopener" class="text-[var(--color-teal)] hover:underline">LinkedIn</a> for more updates
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Be Part of Our Story
+      </h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Join us in creating more moments of impact. Every volunteer, every donation, every act of kindness adds to our story.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="bg-[var(--color-teal)] text-white px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--color-teal)]/90 transition-colors"
+        >
+          Get Involved
+        </a>
+        <a
+          href="/programs"
+          class="border-2 border-[var(--color-teal)] text-[var(--color-teal)] px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--color-teal)] hover:text-white transition-colors"
+        >
+          Our Programs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<script>
+  // Optimized gallery filter using event delegation
+  const filterContainer = document.getElementById('filter-buttons');
+  const galleryGrid = document.getElementById('gallery-grid');
+
+  if (filterContainer && galleryGrid) {
+    const buttons = filterContainer.querySelectorAll('button');
+    const items = galleryGrid.querySelectorAll('.gallery-item');
+
+    // Use event delegation - single listener on parent
+    filterContainer.addEventListener('click', (e) => {
+      const button = e.target.closest('button');
+      if (!button) return;
+
+      const category = button.dataset.category;
+
+      // Update button styles efficiently
+      buttons.forEach(btn => {
+        const isActive = btn === button;
+        btn.classList.toggle('bg-[var(--color-teal)]', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-gray-100', !isActive);
+        btn.classList.toggle('text-gray-700', !isActive);
+      });
+
+      // Filter items with CSS class toggle (smoother transitions)
+      items.forEach(item => {
+        const show = category === 'All' || item.dataset.category === category;
+        item.style.display = show ? '' : 'none';
+      });
+    });
+  }
+</script>

@@ -1,0 +1,208 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  preloadImage?: string;
+  keywords?: string;
+  type?: string;
+}
+
+const {
+  title,
+  description = "United Hands Bangladesh - Together for Humanity, Together for Change. A human rights organization empowering communities through education, healthcare, food distribution, and sustainable development in Dhaka, Bangladesh.",
+  preloadImage,
+  keywords = "United Hands Bangladesh, human rights organization Bangladesh, nonprofit Bangladesh, charity Dhaka, food distribution Bangladesh, free medical camp Dhaka, community development, education support Bangladesh, healthcare Bangladesh, volunteer Bangladesh, NGO Bangladesh, humanitarian aid Bangladesh, poverty alleviation, social welfare Bangladesh",
+  type = "website"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://unitedhandsbd.org');
+const siteURL = 'https://unitedhandsbd.org';
+
+// Structured Data for Organization
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "United Hands Bangladesh",
+  "alternateName": "UHB",
+  "url": siteURL,
+  "logo": `${siteURL}/images/logo.jpeg`,
+  "description": "A human rights organization empowering communities through education, healthcare, food distribution, and sustainable development in Bangladesh.",
+  "foundingDate": "2025",
+  "founder": {
+    "@type": "Person",
+    "name": "Anisur Rahman",
+    "jobTitle": "Founder & CEO",
+    "url": "https://unitedhandsbd.org/anisur-rahman",
+    "sameAs": [
+      "https://linkedin.com/in/anisur-rahman-490145385",
+      "https://facebook.com/2025uhb"
+    ]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "48 East Basabo",
+    "addressLocality": "Dhaka",
+    "postalCode": "1214",
+    "addressCountry": "BD"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+880-1825-554-945",
+    "contactType": "customer service",
+    "email": "support@unitedhandsbd.org",
+    "availableLanguage": ["English", "Bengali"]
+  },
+  "sameAs": [
+    "https://facebook.com/2025uhb",
+    "https://linkedin.com/company/unitedhandsbangladesh",
+    "https://twitter.com/unitedhandsbd",
+    "https://instagram.com/unitedhandsbd"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Bangladesh"
+  },
+  "knowsAbout": ["Human Rights", "Education", "Healthcare", "Food Security", "Community Development", "Poverty Alleviation"]
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteURL
+    },
+    ...(Astro.url.pathname !== '/' ? [{
+      "@type": "ListItem",
+      "position": 2,
+      "name": title,
+      "item": canonicalURL.toString()
+    }] : [])
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9934VEB6C"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H9934VEB6C');
+    </script>
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title} | United Hands Bangladesh - Human Rights Organization</title>
+    <meta name="title" content={`${title} | United Hands Bangladesh - Human Rights Organization`} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="United Hands Bangladesh" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- Geographic SEO -->
+    <meta name="geo.region" content="BD-13" />
+    <meta name="geo.placename" content="Dhaka, Bangladesh" />
+    <meta name="geo.position" content="23.7104;90.4074" />
+    <meta name="ICBM" content="23.7104, 90.4074" />
+
+    <!-- Language -->
+    <meta name="language" content="English" />
+    <meta http-equiv="content-language" content="en-bd" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/jpeg" href="/images/logo.jpeg" />
+    <link rel="apple-touch-icon" href="/images/logo.jpeg" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Preload LCP image for faster loading -->
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} type="image/webp" />
+    )}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | United Hands Bangladesh`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteURL}/images/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="United Hands Bangladesh" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="fb:page_id" content="2025uhb" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@unitedhandsbd" />
+    <meta name="twitter:creator" content="@unitedhandsbd" />
+    <meta name="twitter:title" content={`${title} | United Hands Bangladesh`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteURL}/images/og-image.jpg`} />
+
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+    <!-- Structured Data - Breadcrumbs -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+    <!-- DNS Prefetch & Preconnect for faster external resources -->
+    <link rel="dns-prefetch" href="https://api.resend.com" />
+    <link rel="preconnect" href="https://api.resend.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- Fonts - optimized loading with display=swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    </noscript>
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900">
+    <slot name="header" />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-primary: #C9A961;
+    --color-primary-dark: #B8943A;
+    --color-teal: #2D7A7A;
+    --color-brown: #8B4513;
+    --color-cream: #FDF8F0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  }
+
+  /* Optimize rendering */
+  img, video {
+    content-visibility: auto;
+  }
+</style>

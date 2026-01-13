@@ -1,0 +1,174 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/programs', label: 'Programs' },
+  { href: '/impact', label: 'Impact' },
+  { href: '/events', label: 'Events' },
+  { href: '/gallery', label: 'Gallery' },
+];
+
+const moreLinks = [
+  { href: '/team', label: 'Our Team' },
+  { href: '/volunteer', label: 'Volunteer' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3">
+        <img
+          src="/images/logo.jpeg"
+          alt="United Hands Bangladesh Logo"
+          class="h-14 w-14 rounded-full object-cover"
+        />
+        <div class="hidden sm:block">
+          <h1 class="text-lg font-bold text-[var(--color-primary)]">United Hands Bangladesh</h1>
+          <p class="text-xs text-gray-500">Human Rights Organization</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium transition-colors hover:text-[var(--color-primary)] ${
+              currentPath === link.href ? 'text-[var(--color-primary)]' : 'text-gray-700'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+        <!-- More Dropdown -->
+        <div class="relative group">
+          <button id="more-dropdown-btn" class="text-sm font-medium text-gray-700 hover:text-[var(--color-primary)] transition-colors flex items-center gap-1">
+            More
+            <svg class="w-4 h-4 group-hover:rotate-180 transition-transform dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="more-dropdown-menu" class="absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[160px]">
+              {moreLinks.map(link => (
+                <a
+                  href={link.href}
+                  class={`block px-4 py-2 text-sm hover:bg-[var(--color-cream)] transition-colors ${
+                    currentPath === link.href ? 'text-[var(--color-primary)]' : 'text-gray-700'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <a
+          href="/volunteer"
+          class="bg-[var(--color-teal)] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[var(--color-teal)]/90 transition-colors"
+        >
+          Get Involved
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-gray-700 hover:text-[var(--color-primary)]"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col gap-1">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium py-2 transition-colors hover:text-[var(--color-primary)] ${
+              currentPath === link.href ? 'text-[var(--color-primary)]' : 'text-gray-700'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+        <div class="border-t border-gray-100 my-2"></div>
+        {moreLinks.map(link => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium py-2 transition-colors hover:text-[var(--color-primary)] ${
+              currentPath === link.href ? 'text-[var(--color-primary)]' : 'text-gray-700'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="/volunteer"
+          class="bg-[var(--color-teal)] text-white px-5 py-2.5 rounded-full text-sm font-semibold text-center hover:bg-[var(--color-teal)]/90 transition-colors mt-3"
+        >
+          Get Involved
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Click-based dropdown visibility */
+  .dropdown-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .dropdown-open + div .dropdown-arrow,
+  .arrow-rotated {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  // Desktop "More" dropdown toggle
+  const moreBtn = document.getElementById('more-dropdown-btn');
+  const moreMenu = document.getElementById('more-dropdown-menu');
+  const dropdownArrow = moreBtn?.querySelector('.dropdown-arrow');
+
+  moreBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    moreMenu?.classList.toggle('dropdown-open');
+    dropdownArrow?.classList.toggle('arrow-rotated');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (moreBtn && moreMenu && !moreBtn.contains(e.target as Node) && !moreMenu.contains(e.target as Node)) {
+      moreMenu.classList.remove('dropdown-open');
+      dropdownArrow?.classList.remove('arrow-rotated');
+    }
+  });
+
+  // Close dropdown when pressing Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && moreMenu?.classList.contains('dropdown-open')) {
+      moreMenu.classList.remove('dropdown-open');
+      dropdownArrow?.classList.remove('arrow-rotated');
+    }
+  });
+</script>

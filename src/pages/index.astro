@@ -1,0 +1,679 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+// Hero images - high-quality photos showcasing our impact
+const heroImages = [
+  {
+    src: '/images/gallery/590295344_122115878463007573_6828961916537642263_n.jpg',
+    alt: 'Volunteer helping children with food',
+    position: 'center 30%'
+  },
+  {
+    src: '/images/gallery/605340597_122119405491007573_4746787242545134854_n.jpg',
+    alt: 'Smiling boy receiving food package with joy',
+    position: 'center 25%'
+  },
+  {
+    src: '/images/gallery/555385630_122105180217007573_5951213828479555981_n.jpg',
+    alt: 'Free medical services for community members',
+    position: 'center 40%'
+  },
+  {
+    src: '/images/gallery/581931251_122113960773007573_7320039804328164070_n.jpg',
+    alt: 'Grandmother and child receiving food assistance',
+    position: 'center 35%'
+  },
+  {
+    src: '/images/gallery/557636179_122106841755007573_6663589741403764710_n.jpg',
+    alt: 'Leader distributing food to smiling children',
+    position: 'center 30%'
+  },
+  {
+    src: '/images/gallery/571197361_122112067671007573_2515374789331075447_n.jpg',
+    alt: 'Two women happily receiving food packages',
+    position: 'center 35%'
+  },
+  {
+    src: '/images/gallery/605359263_122119405011007573_7132557887102658754_n.jpg',
+    alt: 'Bringing joy to people with disabilities',
+    position: 'center 35%'
+  },
+  {
+    src: '/images/gallery/590298745_122115878679007573_1844884259089963020_n.jpg',
+    alt: 'Smiling girl receiving food assistance',
+    position: 'center 25%'
+  },
+  {
+    src: '/images/gallery/574104761_122112066819007573_4881499215873013039_n.jpg',
+    alt: 'Inclusive community event with disability support',
+    position: 'center 45%'
+  },
+  {
+    src: '/images/gallery/581936617_122113959447007573_2012506508899052520_n.jpg',
+    alt: 'Large community food distribution event',
+    position: 'center 40%'
+  },
+];
+
+const programs = [
+  {
+    title: 'Educational Outreach',
+    description: 'Providing quality education and learning opportunities to underprivileged children and communities.',
+    icon: 'education',
+    href: '/programs#education'
+  },
+  {
+    title: 'Healthcare Support',
+    description: 'Free medical camps, health checkups, and mental health support for those in need.',
+    icon: 'healthcare',
+    href: '/programs#healthcare'
+  },
+  {
+    title: 'Community Building',
+    description: 'Strengthening local communities through engagement, empowerment, and sustainable development.',
+    icon: 'community',
+    href: '/programs#community'
+  },
+  {
+    title: 'Food Distribution',
+    description: 'Regular food drives and nutrition programs to combat hunger and food insecurity.',
+    icon: 'food',
+    href: '/programs#food'
+  },
+];
+
+const testimonials = [
+  {
+    name: 'Amina Rahman',
+    role: 'Community Beneficiary',
+    quote: 'United Hands Bangladesh has changed our lives. The educational support they provide has given my children a future I never thought possible.',
+  },
+  {
+    name: 'Saiful Islam',
+    role: 'Community Observer',
+    quote: 'The dedication and compassion of this organization is truly inspiring. They work tirelessly to improve the lives of those in need.',
+  },
+  {
+    name: 'Monowara Begum',
+    role: 'Medical Camp Recipient',
+    quote: 'The free medical checkup saved my life. I was diagnosed early and got the treatment I needed, all thanks to United Hands.',
+    image: '/images/gallery/testimonial-1.jpeg'
+  },
+];
+
+const stats = [
+  { value: 5000, suffix: '+', label: 'Lives Impacted' },
+  { value: 50, suffix: '+', label: 'Community Events' },
+  { value: 100, suffix: '+', label: 'Volunteers' },
+  { value: 10, suffix: '+', label: 'Programs' },
+];
+
+// Impact gallery - quality photos showcasing our work
+const impactImages = [
+  { src: '/images/gallery/605340597_122119405491007573_4746787242545134854_n.jpg', alt: 'Smiling boy receiving food with joy' },
+  { src: '/images/gallery/555385630_122105180217007573_5951213828479555981_n.jpg', alt: 'Free medical services for community' },
+  { src: '/images/gallery/581931251_122113960773007573_7320039804328164070_n.jpg', alt: 'Grandmother and child with food' },
+  { src: '/images/gallery/557636179_122106841755007573_6663589741403764710_n.jpg', alt: 'Leader distributing food to children' },
+  { src: '/images/gallery/571197361_122112067671007573_2515374789331075447_n.jpg', alt: 'Two women receiving food packages' },
+  { src: '/images/gallery/605359263_122119405011007573_7132557887102658754_n.jpg', alt: 'Bringing joy to people with disabilities' },
+  { src: '/images/gallery/590295344_122115878463007573_6828961916537642263_n.jpg', alt: 'Volunteer helping children with food' },
+  { src: '/images/gallery/590298745_122115878679007573_1844884259089963020_n.jpg', alt: 'Smiling girl receiving food assistance' },
+  { src: '/images/gallery/574104761_122112066819007573_4881499215873013039_n.jpg', alt: 'Inclusive community event' },
+  { src: '/images/gallery/581936617_122113959447007573_2012506508899052520_n.jpg', alt: 'Large food distribution event' },
+  { src: '/images/gallery/600302600_122118543885007573_2669771354120440175_n.jpg', alt: 'Joyful celebration - aid distribution' },
+  { src: '/images/gallery/community-2.jpg', alt: 'Healthcare support for community' },
+];
+---
+
+<Layout title="Home" preloadImage="/images/gallery/optimized/590295344_122115878463007573_6828961916537642263_n.webp">
+  <Header slot="header" />
+
+  <!-- STUNNING HERO SECTION -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background Image Carousel -->
+    <div class="absolute inset-0 z-0">
+      <div id="hero-carousel" class="relative h-full w-full">
+        {heroImages.map((image, index) => (
+          <div
+            class={`hero-slide absolute inset-0 transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+            data-index={index}
+          >
+            <img
+              src={`/images/gallery/optimized/${image.src.split('/').pop()?.replace(/\.(jpeg|png)$/i, '.jpg').replace('.jpg', '.webp')}`}
+              alt={image.alt}
+              class="w-full h-full object-cover"
+              style={`object-position: ${image.position || 'center center'}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+      <!-- MUCH DARKER Gradient Overlay for text readability -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/60"></div>
+      <div class="absolute inset-0 bg-black/30"></div>
+      <!-- Animated Particles Effect -->
+      <div class="absolute inset-0 opacity-20" id="particles"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="max-w-3xl">
+        <div class="animate-fade-in-up">
+          <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-full mb-8 border border-white/30 shadow-lg">
+            <span class="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-pulse"></span>
+            Human Rights Organization
+          </span>
+        </div>
+
+        <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 animate-fade-in-up animation-delay-100">
+          Empowering Lives,<br/>
+          Transforming Communities
+        </h1>
+
+        <p class="hero-subtitle text-xl md:text-2xl text-white mb-10 leading-relaxed animate-fade-in-up animation-delay-200 max-w-2xl font-medium">
+          Together for Humanity, Together for Change. We're creating lasting impact through compassion, education, and sustainable development.
+        </p>
+
+        <div class="flex flex-wrap gap-4 animate-fade-in-up animation-delay-300">
+          <a
+            href="/programs"
+            class="group bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-teal)] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-[var(--color-primary)]/30 transition-all duration-300 inline-flex items-center gap-3 hover:scale-105"
+          >
+            Explore Our Work
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href="/contact"
+            class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105"
+          >
+            Get Involved
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+      {heroImages.map((_, index) => (
+        <button
+          class={`carousel-dot w-3 h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'}`}
+          data-index={index}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 right-8 z-20 hidden lg:block animate-bounce">
+      <div class="flex flex-col items-center gap-2 text-white/60">
+        <span class="text-xs uppercase tracking-widest">Scroll</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATED STATS SECTION -->
+  <section class="py-16 bg-gradient-to-r from-[var(--color-teal)] to-[#1a5f5f] relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map((stat, index) => (
+          <div class="text-center group">
+            <div class="text-5xl md:text-6xl font-bold text-white mb-2 flex items-center justify-center">
+              <span class="stat-number" data-value={stat.value} data-suffix={stat.suffix}>0</span>
+              <span class="stat-suffix">{stat.suffix}</span>
+            </div>
+            <div class="text-white/80 font-medium text-lg">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT GALLERY SHOWCASE -->
+  <section class="py-20 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          Making Real Difference
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          See Our Impact in Action
+        </h2>
+        <p class="text-xl text-gray-600">
+          Every photo tells a story of hope, compassion, and positive change in our communities.
+        </p>
+      </div>
+
+      <!-- Masonry-style Gallery -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {impactImages.map((image, index) => (
+          <div class={`group relative overflow-hidden rounded-2xl ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''} ${index === 3 ? 'md:col-span-2' : ''}`}>
+            <OptimizedImage
+              src={image.src}
+              alt={image.alt}
+              class={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${index === 0 ? 'h-64 md:h-full' : 'h-48 md:h-64'}`}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p class="text-white font-medium">{image.alt}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href="/gallery"
+          class="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105"
+        >
+          View Full Gallery
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION WITH FLOATING CARDS -->
+  <section class="py-20 bg-gradient-to-br from-[var(--color-cream)] to-white relative overflow-hidden">
+    <div class="absolute top-20 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-0 w-64 h-64 bg-[var(--color-teal)]/5 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 relative">
+          <!-- Floating Image Cards -->
+          <div class="relative h-[500px]">
+            <div class="absolute top-0 left-0 w-64 h-64 rounded-2xl overflow-hidden shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-500 z-10">
+              <OptimizedImage
+                src="/images/gallery/600312389_122118543021007573_1044733114448348995_n.jpg"
+                alt="Food distribution"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="absolute top-20 right-0 w-56 h-56 rounded-2xl overflow-hidden shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500 z-20">
+              <OptimizedImage
+                src="/images/gallery/medical-camp.jpg"
+                alt="Medical camp"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="absolute bottom-0 left-20 w-60 h-60 rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-30">
+              <OptimizedImage
+                src="/images/gallery/591474761_122115877257007573_2188404650090162025_n.jpg"
+                alt="Community event"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+            About Us
+          </span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Building Stronger Communities <span class="text-[var(--color-teal)]">Together</span>
+          </h2>
+          <p class="text-xl text-gray-600 mb-6 leading-relaxed">
+            United Hands Bangladesh is a human rights organization dedicated to empowering communities through compassion, education, healthcare, and sustainable development.
+          </p>
+          <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            Founded by Anisur Rahman, our mission is to protect human rights, support vulnerable populations, and create lasting positive change in communities across Bangladesh.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            {['Human Rights Protection', 'Community Empowerment', 'Sustainable Development', 'Mental Health Support'].map(item => (
+              <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
+                <div class="w-10 h-10 bg-[var(--color-teal)]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-[var(--color-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-gray-700 font-medium text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="/about"
+            class="inline-flex items-center gap-2 text-[var(--color-teal)] font-semibold text-lg hover:text-[var(--color-primary)] transition-colors group"
+          >
+            Read Our Full Story
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS SECTION -->
+  <section class="py-20 bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 right-0 w-full h-full bg-[url('/images/gallery/optimized/1766783562693.webp')] bg-cover bg-center"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block bg-[var(--color-primary)]/20 text-[var(--color-primary)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          What We Do
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          Our Programs
+        </h2>
+        <p class="text-xl text-gray-400">
+          We run diverse programs focused on education, healthcare, community development, and food security to create lasting impact.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {programs.map(program => (
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+            <div class="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-teal)] rounded-xl flex items-center justify-center mb-6">
+              {program.icon === 'education' && (
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                </svg>
+              )}
+              {program.icon === 'healthcare' && (
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 0v4m0-4h4m-4 0H8" />
+                </svg>
+              )}
+              {program.icon === 'community' && (
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              )}
+              {program.icon === 'food' && (
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">{program.title}</h3>
+            <p class="text-gray-400 mb-4 leading-relaxed">{program.description}</p>
+            <a href={program.href} class="text-[var(--color-primary)] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+              Learn More
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <a
+          href="/programs"
+          class="inline-flex items-center gap-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-teal)] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-[var(--color-primary)]/30 transition-all hover:scale-105"
+        >
+          View All Programs
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER SECTION -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+            Leadership
+          </span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Meet Our Founder
+          </h2>
+          <h3 class="text-2xl font-semibold text-[var(--color-primary)] mb-4">Anisur Rahman</h3>
+          <p class="text-xl text-gray-600 mb-4 leading-relaxed">
+            Founder and CEO of United Hands Bangladesh, Anisur Rahman is a dedicated human rights advocate with a vision to empower communities and protect the vulnerable.
+          </p>
+          <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            With experience as the former President of Bangladesh Korea Migrant Center, he brings deep expertise in advocacy, community organizing, and sustainable development.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            {['Human Rights', 'Community Development', 'Mental Health', 'Poverty Alleviation'].map(tag => (
+              <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-2 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-teal)] rounded-2xl opacity-20 blur-2xl"></div>
+          <OptimizedImage
+            src="/images/team/anisur-rahman-v2.png"
+            alt="Anisur Rahman - Founder"
+            class="relative rounded-2xl shadow-2xl w-full max-w-lg mx-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          Testimonials
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Voices of Hope and Change
+        </h2>
+        <p class="text-xl text-gray-600">
+          Hear from the communities and individuals whose lives have been transformed through our programs.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {testimonials.map(testimonial => (
+          <TestimonialCard {...testimonial} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="py-24 bg-gradient-to-br from-[var(--color-teal)] via-[#1a6b6b] to-[var(--color-primary)] relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-0 w-full h-full opacity-10">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        Join Us in Making a Difference
+      </h2>
+      <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+        Whether through volunteering, partnerships, or spreading awareness, every contribution helps us create lasting positive change in our communities.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="bg-white text-[var(--color-teal)] px-10 py-4 rounded-full font-bold text-lg hover:bg-[var(--color-cream)] transition-all hover:scale-105 shadow-xl"
+        >
+          Get Involved Today
+        </a>
+        <a
+          href="/programs"
+          class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-[var(--color-teal)] transition-all hover:scale-105"
+        >
+          View Programs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <NewsletterSignup />
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style>
+  /* Hero text styles for maximum readability */
+  .hero-title {
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.8),
+      0 4px 8px rgba(0, 0, 0, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-subtitle {
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.9),
+      0 4px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+
+  /* Particle effect */
+  #particles {
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 2px, transparent 2px);
+    background-size: 100px 100px, 150px 150px, 200px 200px;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-10px) translateX(5px); }
+    50% { transform: translateY(0) translateX(10px); }
+    75% { transform: translateY(10px) translateX(5px); }
+  }
+</style>
+
+<script>
+  // Hero Carousel
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  let currentSlide = 0;
+  let slideInterval: ReturnType<typeof setInterval>;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('opacity-100', i === index);
+      slide.classList.toggle('opacity-0', i !== index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-white', i === index);
+      dot.classList.toggle('w-8', i === index);
+      dot.classList.toggle('bg-white/50', i !== index);
+      dot.classList.toggle('w-3', i !== index);
+    });
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % slides.length;
+    showSlide(next);
+  }
+
+  function startCarousel() {
+    slideInterval = setInterval(nextSlide, 5000);
+  }
+
+  // Initialize
+  startCarousel();
+
+  // Dot click handlers
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      showSlide(index);
+      startCarousel();
+    });
+  });
+
+  // Stats Counter Animation
+  const statNumbers = document.querySelectorAll('.stat-number');
+  const observerOptions = {
+    threshold: 0.5
+  };
+
+  const animateCounter = (element: Element) => {
+    const target = parseInt(element.getAttribute('data-value') || '0');
+    const suffix = element.getAttribute('data-suffix') || '';
+    const duration = 2000;
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current).toLocaleString();
+    }, 16);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  statNumbers.forEach(stat => observer.observe(stat));
+</script>

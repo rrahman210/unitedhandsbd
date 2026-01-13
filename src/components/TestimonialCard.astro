@@ -1,0 +1,33 @@
+---
+import OptimizedImage from './OptimizedImage.astro';
+
+interface Props {
+  name: string;
+  role: string;
+  quote: string;
+  image?: string;
+}
+
+const { name, role, quote, image } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+  <div class="flex items-center gap-4 mb-4">
+    {image ? (
+      <OptimizedImage src={image} alt={name} class="w-12 h-12 rounded-full object-cover" />
+    ) : (
+      <div class="w-12 h-12 rounded-full bg-[var(--color-cream)] flex items-center justify-center">
+        <span class="text-lg font-semibold text-[var(--color-primary)]">
+          {name.charAt(0)}
+        </span>
+      </div>
+    )}
+    <div>
+      <h3 class="font-semibold text-gray-900 text-base">{name}</h3>
+      <p class="text-sm text-gray-500">{role}</p>
+    </div>
+  </div>
+  <blockquote class="text-gray-600 italic leading-relaxed">
+    "{quote}"
+  </blockquote>
+</div>

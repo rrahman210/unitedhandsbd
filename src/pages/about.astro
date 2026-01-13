@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+const team = [
+  { name: 'Anisur Rahman', role: 'Founder & CEO', image: '/images/team/anisur-rahman-v2.png' },
+  { name: 'Kaosar Ahmed', role: 'Chief Operational Director', image: '/images/team/kaosar-ahmed.jpg' },
+  { name: 'Rupak Ghoshal', role: 'HR Director' },
+  { name: 'Advocate PK. Abdur Rob', role: 'Lead Attorney', image: '/images/team/advocate-abdur-rob.jpg' },
+  { name: 'Maheean Ahmed Akash', role: 'Operational Assistant' },
+  { name: 'Dr. Nur Alam', role: 'Consultant' },
+  { name: 'Hasinur Joy', role: 'Operational Assistant' },
+  { name: 'Md. Nazrul Islam', role: 'Coordinator' },
+];
+
+const values = [
+  { title: 'Compassion', description: 'We approach every situation with empathy and understanding, treating all individuals with dignity and respect.' },
+  { title: 'Integrity', description: 'We maintain the highest ethical standards in all our operations, ensuring transparency and accountability.' },
+  { title: 'Community', description: 'We believe in the power of collective action and work to strengthen bonds within communities.' },
+  { title: 'Empowerment', description: 'We focus on sustainable solutions that enable individuals and communities to thrive independently.' },
+];
+---
+
+<Layout title="About Us" description="Learn about United Hands Bangladesh's mission, vision, and the dedicated team working to empower communities.">
+  <Header slot="header" />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-[var(--color-cream)] to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="inline-block bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+          About Us
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Discover United Hands Bangladesh's Mission and Vision
+        </h1>
+        <p class="text-lg text-gray-600">
+          We are a human rights organization committed to empowering communities through compassion, education, healthcare, and sustainable development.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div class="bg-[var(--color-cream)] rounded-2xl p-8">
+          <div class="w-12 h-12 bg-[var(--color-teal)] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+          <p class="text-gray-600 leading-relaxed">
+            To protect and promote human rights, empower vulnerable communities, and create sustainable positive change through education, healthcare, legal aid, and community development programs across Bangladesh.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8">
+          <div class="w-12 h-12 bg-[var(--color-primary)] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
+          <p class="text-gray-600 leading-relaxed">
+            A Bangladesh where every individual lives with dignity, has access to basic rights and services, and communities thrive together in harmony and mutual support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Our Story</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
+            From Vision to Action
+          </h2>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            United Hands Bangladesh was founded with a simple yet powerful belief: that every person deserves dignity, opportunity, and hope. Our journey began when our founder, Anisur Rahman, witnessed the struggles of vulnerable communities and decided to take action.
+          </p>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            Drawing from his experience as President of the Bangladesh Korea Migrant Center, Anisur understood the challenges faced by marginalized populations. He assembled a team of dedicated professionals committed to making a difference.
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            Today, we continue to grow, reaching more communities and expanding our programs to address the most pressing needs of those we serve.
+          </p>
+        </div>
+        <div>
+          <OptimizedImage
+            src="/images/gallery/605359263_122119405011007573_7132557887102658754_n.jpg"
+            alt="United Hands Bangladesh community members smiling"
+            class="rounded-2xl shadow-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Our Values</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+          What Guides Us
+        </h2>
+        <p class="text-gray-600">
+          Our core values shape everything we do and guide our approach to community service.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map(value => (
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h3 class="text-lg font-semibold text-[var(--color-primary)] mb-3">{value.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-20 bg-[var(--color-cream)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-[var(--color-teal)] font-medium text-sm uppercase tracking-wider">Our Team</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+          Our Dedicated Changemakers
+        </h2>
+        <p class="text-gray-600">
+          Meet the passionate individuals working tirelessly to make a difference.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {team.map(member => (
+          <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+            {member.image ? (
+              <OptimizedImage
+                src={member.image}
+                alt={member.name}
+                class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+              />
+            ) : (
+              <div class="w-24 h-24 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center mx-auto mb-4">
+                <span class="text-2xl font-bold text-[var(--color-primary)]">
+                  {member.name.charAt(0)}
+                </span>
+              </div>
+            )}
+            <h3 class="font-semibold text-gray-900">{member.name}</h3>
+            <p class="text-sm text-gray-500">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Want to Join Our Mission?
+      </h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Whether you want to volunteer, partner with us, or learn more about our work, we'd love to hear from you.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="bg-[var(--color-teal)] text-white px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--color-teal)]/90 transition-colors"
+        >
+          Get in Touch
+        </a>
+        <a
+          href="/programs"
+          class="border-2 border-[var(--color-teal)] text-[var(--color-teal)] px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--color-teal)] hover:text-white transition-colors"
+        >
+          View Programs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <NewsletterSignup />
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
