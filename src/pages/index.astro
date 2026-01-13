@@ -139,20 +139,31 @@ const impactImages = [
     <!-- Background Image Carousel -->
     <div class="absolute inset-0 z-0">
       <div id="hero-carousel" class="relative h-full w-full">
-        {heroImages.map((image, index) => (
-          <div
-            class={`hero-slide absolute inset-0 transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
-            data-index={index}
-          >
-            <img
-              src={`/images/gallery/optimized/${image.src.split('/').pop()?.replace(/\.(jpeg|png)$/i, '.jpg').replace('.jpg', '.webp')}`}
-              alt={image.alt}
-              class="w-full h-full object-cover"
-              style={`object-position: ${image.position || 'center center'}`}
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
-          </div>
-        ))}
+        {heroImages.map((image, index) => {
+          const baseFilename = image.src.split('/').pop()?.replace(/\.(jpeg|png)$/i, '.jpg').replace('.jpg', '.webp');
+          const smFilename = baseFilename?.replace('.webp', '-sm.webp');
+          const mdFilename = baseFilename?.replace('.webp', '-md.webp');
+          return (
+            <div
+              class={`hero-slide absolute inset-0 transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              data-index={index}
+            >
+              <img
+                src={`/images/gallery/optimized/${baseFilename}`}
+                srcset={`/images/gallery/optimized/${smFilename} 640w, /images/gallery/optimized/${mdFilename} 1024w, /images/gallery/optimized/${baseFilename} 1920w`}
+                sizes="100vw"
+                alt={image.alt}
+                width="1920"
+                height="1080"
+                class="w-full h-full object-cover"
+                style={`object-position: ${image.position || 'center center'}`}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : undefined}
+                decoding={index === 0 ? 'sync' : 'async'}
+              />
+            </div>
+          );
+        })}
       </div>
       <!-- MUCH DARKER Gradient Overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/60"></div>
@@ -247,7 +258,7 @@ const impactImages = [
   <section class="py-20 bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+        <span class="inline-block bg-[var(--color-teal)]/10 text-[#1a5f5f] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
           Making Real Difference
         </span>
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -265,6 +276,8 @@ const impactImages = [
             <OptimizedImage
               src={image.src}
               alt={image.alt}
+              width={800}
+              height={600}
               class={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${index === 0 ? 'h-64 md:h-full' : 'h-48 md:h-64'}`}
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -302,21 +315,21 @@ const impactImages = [
             <div class="absolute top-0 left-0 w-64 h-64 rounded-2xl overflow-hidden shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-500 z-10">
               <OptimizedImage
                 src="/images/gallery/600312389_122118543021007573_1044733114448348995_n.jpg"
-                alt="Food distribution"
+                alt="Food distribution" width={1040} height={780}
                 class="w-full h-full object-cover"
               />
             </div>
             <div class="absolute top-20 right-0 w-56 h-56 rounded-2xl overflow-hidden shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500 z-20">
               <OptimizedImage
                 src="/images/gallery/medical-camp.jpg"
-                alt="Medical camp"
+                alt="Medical camp" width={533} height={800}
                 class="w-full h-full object-cover"
               />
             </div>
             <div class="absolute bottom-0 left-20 w-60 h-60 rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 z-30">
               <OptimizedImage
                 src="/images/gallery/591474761_122115877257007573_2188404650090162025_n.jpg"
-                alt="Community event"
+                alt="Community event" width={806} height={800}
                 class="w-full h-full object-cover"
               />
             </div>
@@ -324,7 +337,7 @@ const impactImages = [
         </div>
 
         <div class="order-1 lg:order-2">
-          <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          <span class="inline-block bg-[var(--color-teal)]/10 text-[#1a5f5f] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
             About Us
           </span>
           <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -371,7 +384,7 @@ const impactImages = [
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="inline-block bg-[var(--color-primary)]/20 text-[var(--color-primary)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+        <span class="inline-block bg-[var(--color-primary)]/20 text-[#7a5d1a] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
           What We Do
         </span>
         <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -411,8 +424,8 @@ const impactImages = [
             </div>
             <h3 class="text-xl font-bold text-white mb-3">{program.title}</h3>
             <p class="text-gray-400 mb-4 leading-relaxed">{program.description}</p>
-            <a href={program.href} class="text-[var(--color-primary)] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-              Learn More
+            <a href={program.href} aria-label={`Learn more about ${program.title}`} class="text-[var(--color-primary)] font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+              Explore {program.title}
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -439,13 +452,13 @@ const impactImages = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+          <span class="inline-block bg-[var(--color-teal)]/10 text-[#1a5f5f] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
             Leadership
           </span>
           <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Meet Our Founder
           </h2>
-          <h3 class="text-2xl font-semibold text-[var(--color-primary)] mb-4">Anisur Rahman</h3>
+          <h3 class="text-2xl font-semibold text-[#8a6d2a] mb-4">Anisur Rahman</h3>
           <p class="text-xl text-gray-600 mb-4 leading-relaxed">
             Founder and CEO of United Hands Bangladesh, Anisur Rahman is a dedicated human rights advocate with a vision to empower communities and protect the vulnerable.
           </p>
@@ -463,8 +476,8 @@ const impactImages = [
         <div class="relative">
           <div class="absolute -inset-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-teal)] rounded-2xl opacity-20 blur-2xl"></div>
           <OptimizedImage
-            src="/images/team/anisur-rahman-v3.png"
-            alt="Anisur Rahman - Founder"
+            src="/images/team/anisur-rahman-updated.jpg"
+            alt="Anisur Rahman - Founder" width={400} height={400}
             class="relative rounded-2xl shadow-2xl w-full max-w-lg mx-auto"
           />
         </div>
@@ -476,7 +489,7 @@ const impactImages = [
   <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="inline-block bg-[var(--color-teal)]/10 text-[var(--color-teal)] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+        <span class="inline-block bg-[var(--color-teal)]/10 text-[#1a5f5f] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
           Testimonials
         </span>
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">

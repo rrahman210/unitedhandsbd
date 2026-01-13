@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+/* Accessibility - Focus visible styles */
+*:focus-visible {
+  outline: 2px solid #2D7A7A;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2D7A7A;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Improve button and link focus states */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #2D7A7A;
+  outline-offset: 2px;
+}
+
+/* Form elements focus */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  ring: 2px;
+  ring-color: #2D7A7A;
+}

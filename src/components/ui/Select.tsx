@@ -10,8 +10,9 @@ export interface SelectProps
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, error, id, options, placeholder, ...props }, ref) => {
+  ({ className, label, error, id, options, placeholder, required, ...props }, ref) => {
     const selectId = id || props.name;
+    const errorId = error ? `${selectId}-error` : undefined;
 
     return (
       <div className="space-y-2">
@@ -21,6 +22,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className="block text-sm font-medium text-gray-700"
           >
             {label}
+            {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
           </label>
         )}
         <select
@@ -31,6 +33,10 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className
           )}
           ref={ref}
+          required={required}
+          aria-required={required}
+          aria-invalid={error ? "true" : undefined}
+          aria-describedby={errorId}
           {...props}
         >
           {placeholder && (
@@ -45,7 +51,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
         {error && (
-          <p className="text-sm text-red-500">{error}</p>
+          <p id={errorId} className="text-sm text-red-500" role="alert">{error}</p>
         )}
       </div>
     );

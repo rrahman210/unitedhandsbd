@@ -46,10 +46,17 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+        if (response.status === 400) {
+          setError(data.error || 'Please fill in all required fields correctly.');
+        } else if (response.status === 429) {
+          setError('Too many requests. Please wait a moment and try again.');
+        } else {
+          setError(data.error || 'Failed to send message. Please try again.');
+        }
+        return;
       }
 
       setIsSubmitted(true);
@@ -60,7 +67,7 @@ export default function ContactForm() {
         setFormData({ name: "", email: "", subject: "", message: "" });
       }, 5000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      setError('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -75,8 +82,11 @@ export default function ContactForm() {
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           Message Sent!
         </h3>
-        <p className="text-gray-600">
-          Thank you for reaching out. We'll get back to you soon.
+        <p className="text-gray-600 mb-4">
+          Thank you for reaching out, {formData.name.split(' ')[0] || 'friend'}!
+        </p>
+        <p className="text-sm text-gray-500">
+          We typically respond within 24-48 hours. Check your email at <strong>{formData.email}</strong> for our reply.
         </p>
       </div>
     );
@@ -87,9 +97,12 @@ export default function ContactForm() {
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3" role="alert">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <p className="text-red-700 text-sm">{error}</p>
+          <div>
+            <p className="text-red-700 text-sm font-medium">Unable to send message</p>
+            <p className="text-red-600 text-sm mt-1">{error}</p>
+          </div>
         </div>
       )}
 

@@ -22,12 +22,17 @@ const currentPath = Astro.url.pathname;
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3">
-        <img
-          src="/images/logo.jpeg"
-          alt="United Hands Bangladesh Logo"
-          class="h-14 w-14 rounded-full object-cover"
-        />
+      <a href="/" aria-label="United Hands Bangladesh - Home" class="flex items-center gap-3">
+        <picture>
+          <source srcset="/images/logo.webp" type="image/webp" />
+          <img
+            src="/images/logo.jpeg"
+            alt="United Hands Bangladesh Logo"
+            width="56"
+            height="56"
+            class="h-14 w-14 rounded-full object-cover"
+          />
+        </picture>
         <div class="hidden sm:block">
           <h1 class="text-lg font-bold text-[var(--color-primary)]">United Hands Bangladesh</h1>
           <p class="text-xs text-gray-500">Human Rights Organization</p>

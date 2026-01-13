@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "./ui/Button";
 import { Input } from "./ui/Input";
-import { Mail, CheckCircle, Loader2 } from "./ui/Icons";
+import { Mail, CheckCircle, Loader2, AlertCircle } from "./ui/Icons";
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -21,8 +21,18 @@ export default function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json().catch(() => ({}));
+
       if (!response.ok) {
-        throw new Error("Subscription failed");
+        // Handle specific error cases
+        if (response.status === 409 || data.error?.includes("already")) {
+          setError("This email is already subscribed to our newsletter.");
+        } else if (response.status === 400) {
+          setError("Please enter a valid email address.");
+        } else {
+          setError(data.error || "Subscription failed. Please try again.");
+        }
+        return;
       }
 
       setIsSubmitted(true);
@@ -33,7 +43,7 @@ export default function NewsletterForm() {
         setIsSubmitted(false);
       }, 3000);
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -61,11 +71,16 @@ export default function NewsletterForm() {
           <div className="flex-1">
             <Input
               type="email"
-              name="email"
+              name="newsletter-email"
+              id="newsletter-email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError("");
+              }}
               placeholder="Enter your email"
               required
+              aria-label="Email address for newsletter"
               className="text-center sm:text-left"
             />
           </div>
@@ -80,7 +95,10 @@ export default function NewsletterForm() {
       )}
 
       {error && (
-        <p className="text-red-500 text-sm mt-2">{error}</p>
+        <div className="flex items-center justify-center gap-2 text-red-500 text-sm mt-3" role="alert">
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
       )}
 
       <p className="text-xs text-gray-500 mt-4">
